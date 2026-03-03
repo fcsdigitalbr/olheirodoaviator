@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Users, UserCheck, Clock, TrendingUp, Activity, Zap, CalendarIcon } from "lucide-react";
+import { Users, UserCheck, Clock, TrendingUp, Activity, Zap, Download } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { MetricCard } from "@/components/dashboard/MetricCard";
@@ -7,13 +7,15 @@ import { FunnelChart } from "@/components/dashboard/FunnelChart";
 import { UsersTable } from "@/components/dashboard/UsersTable";
 import { DepositBreakdown } from "@/components/dashboard/DepositBreakdown";
 import { DateRangeFilter } from "@/components/dashboard/DateRangeFilter";
-import { useFunnelMetrics, useUsers } from "@/hooks/useDashboardData";
+import { useFunnelMetrics, useUsers, useDepositVerifications } from "@/hooks/useDashboardData";
+import { exportUsersCsv, exportDepositsCsv } from "@/lib/exportCsv";
 import type { DateRange } from "@/components/dashboard/DateRangeFilter";
 
 const Index = () => {
   const [dateRange, setDateRange] = useState<DateRange>({ from: undefined, to: undefined });
   const metrics = useFunnelMetrics(dateRange);
   const { data: users, isLoading: usersLoading } = useUsers();
+  const { data: deposits } = useDepositVerifications();
 
   // Filter users by date range for the table
   const filteredUsers = users?.filter((u) => {
@@ -53,7 +55,28 @@ const Index = () => {
             Painel de ativação · Fluxo n8n · {rangeLabel}
           </p>
         </div>
-        <DateRangeFilter value={dateRange} onChange={setDateRange} />
+        <div className="flex items-center gap-2">
+          <DateRangeFilter value={dateRange} onChange={setDateRange} />
+          <div className="h-6 w-px bg-border hidden sm:block" />
+          <button
+            onClick={() => filteredUsers && exportUsersCsv(filteredUsers)}
+            disabled={!filteredUsers?.length}
+            className="h-9 px-3 text-xs rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent transition-colors flex items-center gap-1.5 disabled:opacity-40"
+            title="Exportar usuários"
+          >
+            <Download className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Usuários</span>
+          </button>
+          <button
+            onClick={() => deposits && exportDepositsCsv(deposits)}
+            disabled={!deposits?.length}
+            className="h-9 px-3 text-xs rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent transition-colors flex items-center gap-1.5 disabled:opacity-40"
+            title="Exportar depósitos"
+          >
+            <Download className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Depósitos</span>
+          </button>
+        </div>
       </div>
 
       {/* KPI Grid */}
