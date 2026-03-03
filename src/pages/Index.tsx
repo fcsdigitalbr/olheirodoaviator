@@ -46,48 +46,55 @@ const Index = () => {
 
   return (
     <LoginGate>
-      <div className="min-h-screen bg-background p-6 md:p-8 lg:p-10">
+      <div className="min-h-screen bg-background p-4 sm:p-6 md:p-8 lg:p-10">
         {/* Header */}
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-3 mb-1">
-              <Zap className="h-6 w-6 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-              <h1 className="text-2xl font-bold tracking-widest uppercase">
-                <span className="text-primary">OLHEIRO</span>
-                <span className="text-muted-foreground mx-1.5 font-light">DO</span>
-                <span className="text-foreground">AVIATOR</span>
-              </h1>
+        <div className="mb-6 sm:mb-8 flex flex-col gap-4 sm:gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4">
+            <div>
+              <div className="flex items-center gap-2 sm:gap-3 mb-1">
+                <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
+                <h1 className="text-xl sm:text-2xl font-bold tracking-widest uppercase">
+                  <span className="text-primary">OLHEIRO</span>
+                  <span className="text-muted-foreground mx-1 sm:mx-1.5 font-light">DO</span>
+                  <span className="text-foreground">AVIATOR</span>
+                </h1>
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Painel de ativação · Fluxo n8n · {rangeLabel}
+              </p>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Painel de ativação · Fluxo n8n · {rangeLabel}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <DateRangeFilter value={dateRange} onChange={setDateRange} />
-            <div className="h-6 w-px bg-border hidden sm:block" />
-            <button
-              onClick={() => filteredUsers && exportUsersCsv(filteredUsers)}
-              disabled={!filteredUsers?.length}
-              className="h-9 px-3 text-xs rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent transition-colors flex items-center gap-1.5 disabled:opacity-40"
-              title="Exportar usuários"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Usuários</span>
-            </button>
-            <button
-              onClick={() => deposits && exportDepositsCsv(deposits)}
-              disabled={!deposits?.length}
-              className="h-9 px-3 text-xs rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent transition-colors flex items-center gap-1.5 disabled:opacity-40"
-              title="Exportar depósitos"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Depósitos</span>
-            </button>
+            
+            {/* Mobile-first controls */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2">
+              <DateRangeFilter value={dateRange} onChange={setDateRange} />
+              <div className="flex items-center gap-2">
+                <div className="h-6 w-px bg-border hidden sm:block" />
+                <button
+                  onClick={() => filteredUsers && exportUsersCsv(filteredUsers)}
+                  disabled={!filteredUsers?.length}
+                  className="flex-1 sm:flex-none h-9 px-3 text-xs rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent transition-colors flex items-center justify-center gap-1.5 disabled:opacity-40"
+                  title="Exportar usuários"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  <span className="sm:hidden">Usuários</span>
+                  <span className="hidden sm:inline">Usuários</span>
+                </button>
+                <button
+                  onClick={() => deposits && exportDepositsCsv(deposits)}
+                  disabled={!deposits?.length}
+                  className="flex-1 sm:flex-none h-9 px-3 text-xs rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent transition-colors flex items-center justify-center gap-1.5 disabled:opacity-40"
+                  title="Exportar depósitos"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">Depósitos</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* KPI Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
           <MetricCard
             title="Total de Usuários"
             value={metrics.isLoading ? "—" : metrics.totalUsers}
@@ -121,7 +128,7 @@ const Index = () => {
         </div>
 
         {/* Funnel + Deposits */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
           <FunnelChart steps={funnelSteps} />
           <DepositBreakdown
             pending={metrics.pendingDeposits}
@@ -134,7 +141,7 @@ const Index = () => {
         <UsersTable users={filteredUsers ?? []} isLoading={usersLoading} />
 
         {/* Footer */}
-        <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+        <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <Activity className="h-3 w-3" />
             <span>Atualiza automaticamente a cada 30s</span>

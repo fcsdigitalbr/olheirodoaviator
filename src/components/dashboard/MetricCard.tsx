@@ -25,14 +25,14 @@ const iconVariantStyles = {
 
 export function MetricCard({ title, value, subtitle, icon, trend, variant = "default" }: MetricCardProps) {
   return (
-    <div className={`rounded-lg border p-5 animate-slide-up ${variantStyles[variant]}`}>
+    <div className={`rounded-lg border p-4 sm:p-5 animate-slide-up ${variantStyles[variant]}`}>
       <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          <p className="text-sm text-muted-foreground">{title}</p>
-          <p className="text-3xl font-semibold tracking-tight font-mono">{value}</p>
-          {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+        <div className="space-y-1 min-w-0 flex-1">
+          <p className="text-xs sm:text-sm text-muted-foreground truncate">{title}</p>
+          <p className="text-2xl sm:text-3xl font-semibold tracking-tight font-mono break-all">{value}</p>
+          {subtitle && <p className="text-xs text-muted-foreground truncate">{subtitle}</p>}
         </div>
-        <div className={`rounded-lg p-2.5 ${iconVariantStyles[variant]}`}>
+        <div className={`rounded-lg p-2 sm:p-2.5 flex-shrink-0 ml-2 ${iconVariantStyles[variant]}`}>
           {icon}
         </div>
       </div>
@@ -41,7 +41,7 @@ export function MetricCard({ title, value, subtitle, icon, trend, variant = "def
           <span className={trend.value >= 0 ? "text-success" : "text-destructive"}>
             {trend.value >= 0 ? "+" : ""}{trend.value}
           </span>
-          <span className="text-muted-foreground">{trend.label}</span>
+          <span className="text-muted-foreground truncate">{trend.label}</span>
         </div>
       )}
     </div>
