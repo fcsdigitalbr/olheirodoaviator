@@ -37,10 +37,11 @@ export function LoginGate({ children }: LoginGateProps) {
           <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
             <Lock className="h-5 w-5 text-primary" />
           </div>
-          <div className="flex items-center gap-2 mb-1">
-            <Zap className="h-4 w-4 text-primary" />
-            <h1 className="text-lg font-semibold tracking-tight">OLHEIRO DO AVIATOR</h1>
-          </div>
+          <h1 className="text-xl font-bold tracking-widest uppercase mb-1">
+            <span className="text-primary">OLHEIRO</span>
+            <span className="text-muted-foreground mx-1.5 font-light">DO</span>
+            <span className="text-foreground">AVIATOR</span>
+          </h1>
           <p className="text-sm text-muted-foreground">Digite a senha para acessar</p>
         </div>
 
