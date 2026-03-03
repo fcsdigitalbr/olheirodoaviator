@@ -8,14 +8,14 @@ export function DepositBreakdown({ pending, approved, rejected }: DepositBreakdo
   const total = pending + approved + rejected;
 
   const segments = [
-    { label: "Approved", value: approved, color: "bg-success" },
-    { label: "Pending", value: pending, color: "bg-warning" },
-    { label: "Rejected", value: rejected, color: "bg-destructive" },
+    { label: "Aprovado", value: approved, color: "bg-success" },
+    { label: "Pendente", value: pending, color: "bg-warning" },
+    { label: "Rejeitado", value: rejected, color: "bg-destructive" },
   ];
 
   return (
     <div className="rounded-lg border border-border p-5 animate-slide-up">
-      <h3 className="text-sm font-medium text-muted-foreground mb-4">Deposit Verifications</h3>
+      <h3 className="text-sm font-medium text-muted-foreground mb-4">Verificações de Depósito</h3>
 
       {/* Stacked bar */}
       <div className="h-3 rounded-full bg-muted overflow-hidden flex mb-5">

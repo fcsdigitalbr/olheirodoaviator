@@ -13,7 +13,7 @@ export function FunnelChart({ steps }: FunnelChartProps) {
 
   return (
     <div className="rounded-lg border border-border p-5 animate-slide-up">
-      <h3 className="text-sm font-medium text-muted-foreground mb-5">Activation Funnel</h3>
+      <h3 className="text-sm font-medium text-muted-foreground mb-5">Funil de Ativação</h3>
       <div className="space-y-4">
         {steps.map((step, i) => {
           const widthPercent = Math.max((step.value / maxValue) * 100, 8);
