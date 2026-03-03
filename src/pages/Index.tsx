@@ -50,9 +50,13 @@ const Index = () => {
         {/* Header */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Zap className="h-5 w-5 text-primary" />
-              <h1 className="text-xl font-semibold tracking-tight">OLHEIRO DO AVIATOR</h1>
+            <div className="flex items-center gap-3 mb-1">
+              <Zap className="h-6 w-6 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
+              <h1 className="text-2xl font-bold tracking-widest uppercase">
+                <span className="text-primary">OLHEIRO</span>
+                <span className="text-muted-foreground mx-1.5 font-light">DO</span>
+                <span className="text-foreground">AVIATOR</span>
+              </h1>
             </div>
             <p className="text-sm text-muted-foreground">
               Painel de ativação · Fluxo n8n · {rangeLabel}
